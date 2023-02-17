@@ -1,8 +1,8 @@
 import React from 'react';
-// import searchAlbumsAPIs from '../services/searchAlbumsAPI';
+import searchAlbumsAPIs from '../services/searchAlbumsAPI';
 import Header from '../componentes/Header';
 import Loading from '../componentes/Loading';
-// import SearchAlbum from '../componentes/SearchAlbum';
+import SearchAlbum from '../componentes/SearchAlbum';
 
 class Search extends React.Component {
   constructor() {
@@ -10,15 +10,15 @@ class Search extends React.Component {
 
     this.state = {
       artist: '',
-      // nameArtist: '',
+      nameArtist: '',
       loading: false,
-      // albums: [],
+      albums: [],
 
     };
     this.handleChange = this.handleChange.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
-    // this.searchForm = this.searchForm.bind(this);
-    // this.discAlbums = this.discAlbums.bind(this);
+    this.searchForm = this.searchForm.bind(this);
+    this.discAlbums = this.discAlbums.bind(this);
   }
 
   handleChange({ target }) {
@@ -35,16 +35,16 @@ class Search extends React.Component {
       artist,
       loading: true,
     });
-    /* searchAlbumsAPIs(artist).then((artistAlbum) => {
+    searchAlbumsAPIs(artist).then((artistAlbum) => {
       this.setState({
         loading: false,
         albums: artistAlbum,
         artist: '',
       });
-    }); */
+    });
   }
 
-  /* discAlbums() {
+  discAlbums() {
     const { albums, nameArtist } = this.state;
     return (
       albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
@@ -65,7 +65,7 @@ class Search extends React.Component {
           </>
         )
     );
-  } */
+  }
 
   searchForm() {
     const { artist } = this.state;
@@ -101,6 +101,7 @@ class Search extends React.Component {
         <Header />
         <div>
           <h2>{ loading ? <Loading /> : this.searchForm() }</h2>
+          <h2>{ (loading) ? <Loading /> : this.discAlbums() }</h2>
         </div>
       </div>
     );
